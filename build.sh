@@ -1,0 +1,1 @@
+stable env ponyc --pic .
