@@ -1,8 +1,8 @@
 use "collections"
 use "lib:MagickWand-6.Q16"
 
-primitive _MWand //Will use of primitives crash this in a multiple actor situation?
-primitive _PixelMWand
+primitive _Wand //Will use of primitives crash this in a multiple actor situation?
+primitive _Pixelwand
 primitive _Read
 
     
@@ -10,7 +10,7 @@ actor ReadImage
     new create(file:String val,handler:ImageHandler tag) =>
         
         @MagickWandGenesis[None]()
-        var wand = @NewMagickWand[Pointer[_MWand]]()
+        var wand = @NewMagickWand[Pointer[_Wand]]()
         if wand.is_null() then
             return
         end
@@ -31,11 +31,11 @@ end
         let bufferPointer:Pointer[U8] ref = @MagickGetImageBlob[Pointer[U8] ref](wand,addressof len)
         let converted:String ref=  String.from_cpointer(bufferPointer,len)
 
-//        handler.handleImage(file,converted.clone()) //If not cloned, cleaning up MagickMWand would kill string.
+        handler.handleImage(file,converted.clone()) //If not cloned, cleaning up MagickWand would kill string.
         
         //@MagickWriteImage[Bool](wand,"txt:-".cstring())
          
     if wand.is_null() is false then
-         wand = @DestroyMagickWand[Pointer[_MWand]](wand)
+         wand = @DestroyMagickWand[Pointer[_Wand]](wand)
     end
 end

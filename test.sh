@@ -1,1 +1,1 @@
-stable env ponyc --debug --pic ponytest && ./ponytest1
+stable env ponyc --pic ponytest && ./ponytest1

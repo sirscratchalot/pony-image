@@ -1,3 +1,3 @@
 interface ImageHandler
-    be handleImage(image: Image val)
+    be handleImage(file:String val,converted:String val)
     be handleError(file:String val)
